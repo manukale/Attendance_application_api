@@ -8,12 +8,20 @@ const bcrypt = require('bcrypt')
           return res.status(200).json({ msg: 'Invalid Credential' })
         }
         const result = bcrypt.compareSync(req.body.password.trim(), User.password.trim());
-        if (result === false) return res.status(200).json({ msg: 'Invalid Credential' })
-     if(req.body.email === User.email && result && req.body.role === User.role){
-            return res.status(200).json({ msg: 'Login Successful' , role : req.body.role }) 
+        if (result === false){
+          return res.status(200).json({ msg: 'Invalid Credential' })
         }else{
-          return res.status(200).json({ msg: 'Check Your Credential'}) 
-        }
+          // console.log('user:',User);
+          
+          return res.status(200).json({ msg: 'Login Successful', role : User.role })
+
+        } 
+          
+    //  if(req.body.email === User.email && result && req.body.role === User.role){
+    //    return res.status(200).json({ msg: 'Login Successful' , role : req.body.role }) 
+    // }else{
+    //       return res.status(200).json({ msg: 'Check Your Credential'}) 
+    //     }
       } catch (error) {
         next(error);
       }
