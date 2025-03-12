@@ -23,6 +23,11 @@ mongoose.connect(process.env.URL).then(()=>{
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json())
 
+app.get("/", (req, res) => {
+    res.send("<h2>home page</h2>");
+//   res.send(JSON.stringify(product));
+});
+
 // app.use("/api/profile_photos", express.static("profile_photos"));
 app.use('/photos', express.static('photos'));
 app.use('/user',userRouter)
